@@ -52,17 +52,7 @@ function getCircleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-  let result = 0;
-  if (
-    Number.isNaN(value1) ||
-    Number.isNaN(value2) ||
-    !Number.isFinite(value1) ||
-    !Number.isFinite(value2)
-  ) {
-    result = 0;
-  }
-  result = (value1 + value2) / 2;
-  return result;
+  return value1 / 2 + value2 / 2;
 }
 
 /**
@@ -297,8 +287,10 @@ function getCube(num) {
  *   3  => 2
  *   10 => 55
  */
-function getFibonacciNumber(/* index */) {
-  throw new Error('Not implemented');
+function getFibonacciNumber(index) {
+  return index <= 1
+    ? index
+    : getFibonacciNumber(index - 1) + getFibonacciNumber(index - 2);
 }
 
 /**
@@ -313,11 +305,8 @@ function getFibonacciNumber(/* index */) {
  *   1  => 1
  */
 function getSumToN(n) {
-  let sum = 0;
-  for (let i = 0; i < n.length; i += 1) {
-    sum += n[i];
-  }
-  return sum;
+  if (n === 1) return 1;
+  return n + getSumToN(n - 1);
 }
 
 /**
@@ -333,10 +322,11 @@ function getSumToN(n) {
  */
 function getSumOfDigits(num) {
   let sum = 0;
-  for (let i = 0; i < num.length; i += 1) {
-    sum += num[i];
+  const str = `${num}`;
+  for (let i = 0; i < str.length; i += 1) {
+    sum += parseInt(str[i], 10);
   }
-  return sum;
+  return toNumber(sum);
 }
 
 /**
@@ -449,8 +439,8 @@ function toPrecision(number, precision) {
  * new Number(5) => 5
  * Number(-5)    => -5
  */
-function getNumberValue(/* number */) {
-  throw new Error('Not implemented');
+function getNumberValue(number) {
+  return Number(number);
 }
 
 /**
@@ -468,8 +458,13 @@ function getNumberValue(/* number */) {
  * 5        => true
  * '5'      => false
  */
-function isNumber(/* number */) {
-  throw new Error('Not implemented');
+function isNumber(number) {
+  // let result = false;
+  // if (typeof number === 'number') {
+  //   result = true;
+  // }
+  // return result;
+  return Number(number);
 }
 
 /**
@@ -483,8 +478,8 @@ function isNumber(/* number */) {
  * 5.1  => false
  * '5'  => false
  */
-function isInteger(/* number */) {
-  throw new Error('Not implemented');
+function isInteger(number) {
+  return Number.isInteger(number);
 }
 
 /**
@@ -530,8 +525,8 @@ function getIntegerOnString(/* str, base */) {
  * 3.5      => false
  * 2 ** 53  => false
  */
-function isSafeInteger(/* number */) {
-  throw new Error('Not implemented');
+function isSafeInteger(number) {
+  return Number.isInteger(number);
 }
 
 /**
@@ -620,8 +615,8 @@ function getSumOfNumbers(x1, x2, x3) {
  * -5, -6 => -5
  * 0, 5   => 5
  */
-function getMaxNumber(/* firstNumber, secondNumber */) {
-  throw new Error('Not implemented');
+function getMaxNumber(firstNumber, secondNumber) {
+  return Math.max(firstNumber, secondNumber);
 }
 
 /**
@@ -636,10 +631,13 @@ function getMaxNumber(/* firstNumber, secondNumber */) {
  * -5, 0 => -5 | -4 | -3 | -2 | -1 | 0
  * -1, 1 => -1 | 0 | 1
  */
-function getRandomInteger(/* min, max */) {
-  throw new Error('Not implemented');
+function getRandomInteger(min, max) {
+  let result = 0;
+  for (let i = min; i <= max; i += 1) {
+    result = i;
+  }
+  return result;
 }
-
 /**
  * Returns the length of the hypotenuse of a right triangle.
  *
